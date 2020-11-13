@@ -7,6 +7,7 @@ import Button from "components/Button";
 import Table from "components/UsersTable";
 import Text from "components/Typography";
 import AddUser from "components/AddUser";
+import { useHistory } from "react-router-dom";
 
 //Importing dummy data to check pagination
 import UsersData from "./Data";
@@ -35,6 +36,8 @@ const ModalActions = styled.div`
 `;
 
 const Dashboard = () => {
+  let history = useHistory();
+
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pageNum, setPageNum] = useState(1);
@@ -48,7 +51,13 @@ const Dashboard = () => {
   const [selectedId, setSelectedId] = useState("");
 
   useEffect(() => {
-    setUsersData();
+    let token = localStorage.getItem("token");
+    if (token) {
+      history.push("/dashboard");
+      setUsersData();
+    } else {
+      history.push("/login");
+    }
   }, []);
 
   const handleSearchKey = (e) => {
@@ -177,8 +186,9 @@ const Dashboard = () => {
     };
 
     if (isValid) {
+      setIsLoading(true);
       setUsers([...users, newUser]);
-      console.log(users, "users data");
+      setIsLoading(false);
     }
   };
 

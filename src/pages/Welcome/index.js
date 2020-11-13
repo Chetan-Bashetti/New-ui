@@ -21,7 +21,7 @@ const Welcome = () => {
     } else {
       history.push("/login");
     }
-  }, []);
+  }, [history]);
 
   return (
     <Wrapper>

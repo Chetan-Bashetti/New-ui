@@ -56,10 +56,12 @@ const Login = () => {
     }
 
     if (isValid) {
+      setIsLoading(true);
       localStorage.setItem("email", email);
       localStorage.setItem("passowrd", password);
       notification.success({ message: "Successfully created a new account" });
       history.push("/login");
+      setIsLoading(false);
     }
   };
 
