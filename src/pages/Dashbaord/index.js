@@ -69,10 +69,8 @@ const Dashboard = () => {
       message.info("Loading data please wait");
       let pageOffset = (pageNum - 1) * PAGE_LIMIT;
       let pageLimit = pageNum * PAGE_LIMIT;
-      setTimeout(() => {
-        var updatedUsers = UsersData.slice(pageOffset, pageLimit);
-        setUsers([...users, ...updatedUsers]);
-      }, 1000);
+      var updatedUsers = UsersData.slice(pageOffset, pageLimit);
+      setUsers([...users, ...updatedUsers]);
       setPageNum(pageNum + 1);
     } else {
       notification.error({ message: "End of users list" });
